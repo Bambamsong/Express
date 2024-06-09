@@ -70,4 +70,17 @@ router.patch("/diary/modify/:postId", authMiddleware, async (req, res) => {
     res.status(200).json({ message : "수정완료"});
 })
 
+/** 게시글 삭제 API **/
+router.delete("/diary/delete/:postId", authMiddleware, async (req, res) => {
+    const nickname = res.locals.nickname;
+    const { postId } = req.params;
+
+    const existPost = await postSchema.find({_id : postId, nickname});
+    if (existPost.length) {
+        await postSchema.deleteOne({_id : postId})
+    }
+    console.log(`${nickname} 의 ${postId} 게시글이 삭제되었습니다.`)
+    res.json({result : "삭제 완료!"})
+})
+
 module.exports = router;
