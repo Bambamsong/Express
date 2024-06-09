@@ -46,5 +46,22 @@ router.patch("/:commentId/modify", authMiddleware, async (req, res) => {
     res.status(200).json({result : "success"});
 })
 
+/** 댓글 삭제 API **/
+router.delete("/:commentId/delete", authMiddleware, async (req, res) => {
+    const { commentId } = req.params;
+    // const nickname = res.locals.nickname;
+    const nickname = "jinyong1";
+
+    const existComment = await commentSchema.findOne({_id : commentId, nickname : nickname});
+    if (!existComment) {
+        return res.status(400).json({ errorMessage : "수정 권한이 없습니다."});
+    }
+    else{
+        await commentSchema.deleteOne({_id : commentId});
+        console.log(`${nickname} 의 ${commentId} 댓글이 삭제되었습니다.`)
+        res.json({result : "삭제 완료!"})
+    };
+});
+
 module.exports = router;
 
