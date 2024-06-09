@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-/* DB.User: 닉네임, 비밀번호  */
+/**  DB.User: 닉네임, 비밀번호  **/
 const userSchema = new mongoose.Schema({
     nickname :{
         type: String,
