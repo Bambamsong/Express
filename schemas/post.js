@@ -6,7 +6,7 @@ const postsSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    userId: {// 작성자명
+    nickname: {// 작성자명
         type: String,
         required: true
     },
