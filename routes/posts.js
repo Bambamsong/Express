@@ -53,4 +53,21 @@ router.get("/diary/:postId", async (req, res) => {
     console.log("조회 성공!");
     res.status(200).json({ post : findPost, result : "success"});
 })
+
+/** 게시글 수정 API **/
+router.patch("/diary/modify/:postId", authMiddleware, async (req, res) => {
+    const { postId } = req.params;
+    const nickname = res.locals.nickname; // 사용자인증
+    const { title, content } = req.body;
+
+    const existPost = await postSchema.find({_id : postId});
+    if (existPost.length) {
+        await postSchema.updateOne(
+            {nickname, _id: postId}, // 이 사용자의 특정 게시물
+            {$set: {title : title, content : content}}
+        )
+    }
+    res.status(200).json({ message : "수정완료"});
+})
+
 module.exports = router;
