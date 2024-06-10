@@ -1,8 +1,9 @@
 /**
  * @swagger
- * /login:
+ * /api/auth/login:
  *   post:
  *     summary: 사용자 로그인
+ *     tags: [user]
  *     description: nickname과 password를 이용하여 로그인하고 JWT 토큰을 발급받습니다.
  *     requestBody:
  *       required: true
@@ -66,12 +67,18 @@
  *           format: date-time
  *           description: 작성 날짜 및 시간 (ISO 8601 형식)
  */
-
 /**
  * @swagger
- * /{postId}:
+ * tags:
+ *   name: comment
+ *   description: 댓글 관련
+ */
+/**
+ * @swagger
+ * /api/comment/{postId}:
  *   get:
  *     summary: 댓글 조회
+ *     tags: [comment]
  *     description: 특정 게시글의 댓글 목록을 조회합니다.
  *     parameters:
  *       - in: path
@@ -108,9 +115,10 @@
  */
 /**
  * @swagger
- * /{postId}:
+ * /api/comment/{postId}:
  *   post:
  *     summary: 댓글 작성
+ *     tags: [comment]
  *     description: 특정 게시글에 댓글을 작성합니다.
  *     parameters:
  *       - in: path
@@ -155,9 +163,10 @@
  */
 /**
  * @swagger
- * /{commentId}:
+ * /api/comment/{commentId}:
  *   patch:
  *     summary: 댓글 수정
+ *     tags: [comment]
  *     description: 특정 댓글을 수정합니다.
  *     parameters:
  *       - in: path
@@ -202,9 +211,10 @@
  */
 /**
  * @swagger
- * /{commentId}:
+ * /api/comment/{commentId}:
  *   delete:
  *     summary: 댓글 삭제
+ *     tags: [comment]
  *     description: 특정 댓글을 삭제합니다.
  *     parameters:
  *       - in: path
@@ -261,12 +271,18 @@
  *           format: date-time
  *           description: 작성 날짜 및 시간 (ISO 8601 형식)
  */
-
 /**
  * @swagger
- * /:
+ * tags:
+ *   name: post
+ *   description: 게시글 관련
+ */
+/**
+ * @swagger
+ * /api/post:
  *   get:
  *     summary: 전체 게시글 목록 조회
+ *     tags: [post]
  *     description: 전체 게시글 목록을 작성 날짜 내림차순으로 조회합니다.
  *     responses:
  *       200:
@@ -296,9 +312,10 @@
  */
 /**
  * @swagger
- * /:
+ * /api/post:
  *   post:
  *     summary: 게시글 작성
+ *     tags: [post]
  *     description: 새로운 게시글을 작성합니다. (인증 필요)
  *     security:
  *       - bearerAuth: []
@@ -351,9 +368,10 @@
  */
 /**
  * @swagger
- * /{postId}:
+ * /api/post/{postId}:
  *   get:
  *     summary: 게시글 조회
+ *     tags: [post]
  *     description: 특정 게시글을 ID로 조회합니다.
  *     parameters:
  *       - in: path
@@ -390,9 +408,10 @@
  */
 /**
  * @swagger
- * /{postId}:
+ * /api/post/{postId}:
  *   patch:
  *     summary: 게시글 수정
+ *     tags: [post]
  *     description: 특정 게시글을 수정합니다. (인증 필요)
  *     security:
  *       - bearerAuth: []
@@ -440,9 +459,10 @@
  */
 /**
  * @swagger
- * /{postId}:
+ * /api/post/{postId}:
  *   delete:
  *     summary: 게시글 삭제
+ *     tags: [post]
  *     description: 특정 게시글을 삭제합니다. (인증 필요)
  *     security:
  *       - bearerAuth: []
@@ -477,9 +497,16 @@
  */
 /**
  * @swagger
- * /:
+ * tags:
+ *   name: user
+ *   description: 로그인 및 회원가입
+ */
+/**
+ * @swagger
+ * /api/user:
  *   post:
  *     summary: 회원가입
+ *     tags: [user]
  *     description: 사용자 회원가입
  *     requestBody:
  *       required: true
