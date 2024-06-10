@@ -5,11 +5,11 @@ const postSchema = require("../schemas/post");
 const authMiddleware = require("../middlewares/auth-middleware");
 
 /** 전체 게시글 목록 조회 API **/
-router.get("/diary", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         console.log("전체 게시글 조회 시작");
         const posts = await postSchema
-            .find({}, { title: 1, nickname: 1, date: 1, _id: 1 })
+            .find({}, { title: 1, nickname: 1, date: 1, _id: 1, content: 1 })
             .sort("-date"); // 작성날짜 기준 내림차순 정렬
         console.log("전체 게시글 조회 성공");
 
@@ -23,7 +23,7 @@ router.get("/diary", async (req, res) => {
 });
 
 /** 게시글 작성 API **/
-router.post("/diary/post", authMiddleware, async(req, res) => {
+router.post("/", authMiddleware, async(req, res) => {
     const { title, content } = req.body;
     const nickname = res.locals.nickname;
 
@@ -43,7 +43,7 @@ router.post("/diary/post", authMiddleware, async(req, res) => {
 });
 
 /** 게시글 조회 API **/
-router.get("/diary/:postId", async (req, res) => {
+router.get("/:postId", async (req, res) => {
     // const nickname = res.locals.nickname;
     const { postId } = req.params;
     const findPost = await postSchema.find({_id : postId});
@@ -55,7 +55,7 @@ router.get("/diary/:postId", async (req, res) => {
 })
 
 /** 게시글 수정 API **/
-router.patch("/diary/modify/:postId", authMiddleware, async (req, res) => {
+router.patch("/:postId", authMiddleware, async (req, res) => {
     const { postId } = req.params;
     const nickname = res.locals.nickname; // 사용자인증
     const { title, content } = req.body;
@@ -71,7 +71,7 @@ router.patch("/diary/modify/:postId", authMiddleware, async (req, res) => {
 })
 
 /** 게시글 삭제 API **/
-router.delete("/diary/delete/:postId", authMiddleware, async (req, res) => {
+router.delete("/:postId", authMiddleware, async (req, res) => {
     const nickname = res.locals.nickname;
     const { postId } = req.params;
 

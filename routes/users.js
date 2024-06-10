@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../schemas/user");
+// const bcrypt = require("bcrypt");
 
 /** 회원가입 API **/
 function isValidNickname(nickname) {
@@ -14,7 +15,7 @@ function isValidPassword(password, nickname, confirmPassword) {
     return null; // 모든 조건에 부합
 }
 
-router.post("/users", async (req, res) => {
+router.post("/", async (req, res) => {
     const { nickname, password, confirmPassword } = req.body;
 
     // 닉네임 조건

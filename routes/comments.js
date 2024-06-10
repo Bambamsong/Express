@@ -4,8 +4,18 @@ const commentSchema = require("../schemas/comment");
 const postSchema = require("../schemas/post");
 const router = express.Router();
 
+
+/** 댓글 조회 API **/
+router.get("/:postId", authMiddleware, async(req, res) => {
+    const { postId } = req.params;
+    const getComment = await commentSchema.find({postId : postId});
+    if (!getComment) {
+        return res.status(404).json({ errorMessage : "게시글이 존재하지 않습니다."})
+    }
+    res.status(200).json({ comment : getComment, result : "success" });
+})
 /** 댓글 작성 API **/
-router.post("/:postId/comment", authMiddleware, async (req, res) => {
+router.post("/:postId", authMiddleware, async (req, res) => {
     const { postId } = req.params;
     const { comment } = req.body;
     
@@ -28,7 +38,7 @@ router.post("/:postId/comment", authMiddleware, async (req, res) => {
 });
 
 /** 댓글 수정 API **/
-router.patch("/:commentId/modify", authMiddleware, async (req, res) => {
+router.patch("/:commentId", authMiddleware, async (req, res) => {
     const { commentId } = req.params;
     const { comment } = req.body;
     const nickname = res.locals.nickname;
@@ -47,10 +57,10 @@ router.patch("/:commentId/modify", authMiddleware, async (req, res) => {
 })
 
 /** 댓글 삭제 API **/
-router.delete("/:commentId/delete", authMiddleware, async (req, res) => {
+router.delete("/:commentId", authMiddleware, async (req, res) => {
     const { commentId } = req.params;
-    // const nickname = res.locals.nickname;
-    const nickname = "jinyong1";
+    const nickname = res.locals.nickname;
+    // const nickname = "jinyong1";
 
     const existComment = await commentSchema.findOne({_id : commentId, nickname : nickname});
     if (!existComment) {
