@@ -1,3 +1,18 @@
+```
+< 과제 구현 전 >
+
+├── app.js
+├── routes
+│   ├── index.js
+│   ├── comments.js
+│   └── posts.js
+└── schemas
+    ├── index.js
+    ├── comment.js
+    └── post.js
+
+< 과제 구현 후 >
+
 ├── app.js
 ├── middlewares
 │   └── auth-middleware.js
@@ -15,3 +30,4 @@
     ├── index.js
     ├── post.js
     └── user.js
+```
