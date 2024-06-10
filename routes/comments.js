@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 /** 댓글 조회 API **/
-router.get("/:postId", authMiddleware, async(req, res) => {
+router.get("/:postId", async(req, res) => {
     const { postId } = req.params;
     const getComment = await commentSchema.find({postId : postId});
     if (!getComment) {

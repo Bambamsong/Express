@@ -7,7 +7,7 @@ const User = require("../schemas/user");
 router.post("/login", async (req, res) => {
     const { nickname, password } = req.body;
     const user = await User.findOne({ nickname });
-    if (!user || password !== password) {
+    if (!user || password !== user.password) {
         return res.status(400).json({ errorMessage : "닉네임 또는 패스워드가 올바르지 않습니다." });
     }
 
