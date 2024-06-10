@@ -2,13 +2,13 @@
 const mongoose = require("mongoose");
 
 require('dotenv').config();
-const DB_URL = process.env.DATABASE_URL
+// const DB_URL = process.env.DATABASE_URL
 
 const connect = () => {
     mongoose
     .set("strictQuery", true)
     // .connect("mongodb://localhost:27017/Diary")
-    .connect(DB_URL)
+    .connect(process.env.DATABASE_URL)
     .catch((err) => console.log(err));
 };
 
