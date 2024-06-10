@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser"); // 사용자 인증 미들웨어
 const app = express();
 const port = 9000;
 
+require('dotenv').config(); 
 // 스웨거
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
